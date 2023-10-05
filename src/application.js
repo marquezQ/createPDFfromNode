@@ -1,8 +1,18 @@
 import htmlToPdf from "./helpers/html-to-pdf.js";
+import fs from "fs";
 
 class Application{
     static async main(){
-        const buffer = await htmlToPdf('<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Document</title></head><body><h1>Etiqueta h1</h1><h2>Aqui etiqueta h2222</h2></body></html>');  
+
+        const path = './src/template.html';
+        fs.readFile (path, 'utf-8', async (error, data) => {
+            if(error){
+                console.log("error al leer html", error);
+                return;
+            }
+            const buffer = await htmlToPdf(data);
+        })
+          
     }
 }
 
